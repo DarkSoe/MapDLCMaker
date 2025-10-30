@@ -3,6 +3,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const util = require('util');
 const execPromise = util.promisify(exec);
+const nogtapath = "true";
 
 // Define output base directory and gtautil path
 const OUTPUT_BASE_DIR = 'outputmaps'; // This will create folders like 'output/dlc_your_folder_name'
@@ -342,7 +343,7 @@ async function main() {
         // --- Create the single MAPPING_BASE_NAME.rpf ---
         const mappingRpfName = `${mappingBaseNameLower}.rpf`;
         const mappingRpfPath = path.join(dlcOutputRoot, mappingRpfName);
-        const gtautilMappingCommand = `${GTAUTIL_PATH} createarchive --input "${tempMappingRpfInput}" --output "${dlcOutputRoot}" --name ${mappingBaseNameLower}`;
+        const gtautilMappingCommand = `${GTAUTIL_PATH} createarchive --input "${tempMappingRpfInput}" --output "${dlcOutputRoot}" --nopath "${nogtapath}" --name ${mappingBaseNameLower}`;
         console.log(`  Executing: ${gtautilMappingCommand}`);
         try {
             const { stdout, stderr } = await execPromise(gtautilMappingCommand);
@@ -387,7 +388,7 @@ async function main() {
 
         // Execute gtautil to create the final dlc.rpf
         const finalDlcRpfPath = path.join(dlcOutputRoot, 'dlc.rpf');
-        const gtautilFinalDlcCommand = `${GTAUTIL_PATH} createarchive --input "${finalDlcTempInput}" --output "${dlcOutputRoot}" --name dlc`;
+        const gtautilFinalDlcCommand = `${GTAUTIL_PATH} createarchive --input "${finalDlcTempInput}" --output "${dlcOutputRoot}" --nopath "${nogtapath}" --name dlc`;
         console.log(`  Executing: ${gtautilFinalDlcCommand}`);
         try {
             const { stdout, stderr } = await execPromise(gtautilFinalDlcCommand);
