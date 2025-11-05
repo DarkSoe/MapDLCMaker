@@ -77,7 +77,7 @@ Before you begin, ensure you have the following installed:
 
 2.  **Run the Script:**
     ```bash
-    node mapping.js
+    node index.js
     ```
 
 3.  **Monitor the Output:**
